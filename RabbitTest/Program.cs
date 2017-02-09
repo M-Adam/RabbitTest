@@ -11,10 +11,11 @@ namespace RabbitTest
             {
                 HostName = "localhost"
             };
-            var queueName = "tasks_queue";
-            var exchangeName = "log";
+            const string queueName = "tasks_queue";
+            const string directExchangeName = "log";
+            const string topicExchangeName = "log_topics";
 
-            Console.WriteLine("1. Producer \n 2. Consumer \n\n 3. Log emitter \n 4. Log reciever \n\n 5. Topic emitter \n 6. Topic reciever");
+            Console.WriteLine("1. Producer \n2. Consumer \n\n3. Log emitter \n4. Log reciever \n\n5. Topic emitter \n6. Topic reciever");
             Console.WriteLine();
 
             switch (Console.ReadKey().KeyChar)
@@ -26,16 +27,16 @@ namespace RabbitTest
                     new Consumer(factory).Start(queueName);
                     break;
                 case '3':
-                    new LogEmitter(factory).Start(exchangeName);
+                    new LogEmitter(factory).Start(directExchangeName);
                     break;
                 case '4':
-                    new LogReciever(factory).Start(exchangeName);
+                    new LogReciever(factory).Start(directExchangeName);
                     break;
                 case '5':
-                    new TopicEmitter(factory).Start(exchangeName);
+                    new TopicEmitter(factory).Start(topicExchangeName);
                     break;
                 case '6':
-                    new TopicReciever(factory).Start(exchangeName);
+                    new TopicReciever(factory).Start(topicExchangeName);
                     break;
             }
 
